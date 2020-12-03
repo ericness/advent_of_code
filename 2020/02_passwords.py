@@ -32,8 +32,10 @@ def parse_line(line: str) -> Password:
 
 def does_password_follow_policy(password: Password) -> bool:
     """Check if password follows security policy"""
-    return bool(password.password[password.min_count - 1] == password.letter) ^ bool(
-        password.password[password.max_count - 1] == password.letter
+    return (
+        password.min_count
+        <= password.password.count(password.letter)
+        <= password.max_count
     )
 
 
